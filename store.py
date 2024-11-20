@@ -1,39 +1,46 @@
-from products import Product
+import products
 
 
-class Store(Product):
-    def __init__(self, name, price, quantity):
-        super().__init__(name, price, quantity)
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-        self.products = []
+class Store:
+    def __init__(self, products_list):
+        self.products_list = products_list
 
     def add_product(self, product):
-        if product not in self.products:
-            self.products.append(product)
-            return self.products
+        """
+        Adds a product to store
+        :param product:
+        """
+        return self.products_list.append(product)
 
-    def remove_product(self,product):
-        if product in self.products:
-            self.products.remove(product)
-            return self.products
+    def remove_product(self, product):
+        """
+        Removes product from store
+        :param product:
+        """
+        if product in self.products_list:
+            return self.products_list.remove(product)
 
     def get_total_quantity(self):
-        lst_idx = 0
-        item_quantity = 0
-        while lst_idx < len(self.products):
-            item_quantity += 1
-            lst_idx += 1
-        return item_quantity
+        """
+        Returns how many items are in the store in total.
+        """
+        return sum(product.get_quantity() for product in self.products_list)
 
     def get_all_products(self):
-        return [product for product in self.products if product.is_active()]
+        """
+        Returns all products in the store that are active.
+        """
+        return [product for product in self.products_list if product.is_active()]
 
     def order(self, shopping_list):
+        """
+        Gets a list of tuples, where each tuple has 2 items:
+        Product (Product class) and quantity (int).
+        Buys the products and returns the total price of the order.
+
+        :param shopping_list:
+         """
         total_price = 0
         for product, quantity in shopping_list:
             total_price += product.buy(quantity)
-        return total_price
-
-
+        return f"Total cost: {total_price} dollars."
