@@ -20,16 +20,13 @@ class Product:
             return
 
     def is_active(self):
-        if self.quantity > 0 and self.active == True:
-            return True
-        return False
+        return self.active
 
     def activate(self):
-        return self.active
+        self.active = True
 
     def deactivate(self):
         self.active = False
-        return self.active
 
     def show(self):
         print(f"{self.name}: {self.price}, Quantity: {self.quantity}")
