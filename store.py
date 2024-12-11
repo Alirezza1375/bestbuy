@@ -10,7 +10,7 @@ class Store:
         Adds a product to store
         :param product:
         """
-        return self.products_list.append(product)
+        self.products_list.append(product)
 
     def remove_product(self, product):
         """
@@ -18,7 +18,7 @@ class Store:
         :param product:
         """
         if product in self.products_list:
-            return self.products_list.remove(product)
+            self.products_list.remove(product)
 
     def get_total_quantity(self):
         """
@@ -42,15 +42,15 @@ class Store:
          """
         total_price = 0
         for product, quantity in shopping_list:
-            total_price += product.buy(quantity)
-            self.get_total_quantity -= quantity
-        return f"Total cost: {total_price} dollars."
+            try:
+                total_price += product.buy(quantity)
+            except Exception as e:
+                print(e)
+        return total_price
 
 
-product_list = [ products.Product("MacBook Air M2", price=1450, quantity=100),
-                 products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                 products.Product("Google Pixel 7", price=500, quantity=250)
-               ]
 
-best_buy = Store(product_list)
-print(best_buy.get_all_products())
+
+
+
+
