@@ -76,6 +76,9 @@ def start(product_lst):
                         print("Invalid product number. Please try again.")
                 except ValueError:
                     print("Invalid product number. Please enter a valid number.")
+        if cmd == "4":
+            print("ByeBye")
+            sys.exit()
 
 
 start(product_list)
